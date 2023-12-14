@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' Execute the CohortDiagnostics section of the study
+#' Execute the CohortDiagnostics section of the study.
 #'
 #' @details
 #' This function executes the cohort diagnostics.
@@ -67,7 +67,6 @@ runDiagnostics <- function(connectionDetails = NULL,
                            vocabularyDatabaseSchema = cdmDatabaseSchema,
                            cohortTable = "cohort",
                            tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
-                           verifyDependencies = FALSE,
                            cohortsFolder = NULL,
                            outputDir,
                            databaseId = "Unknown") {
