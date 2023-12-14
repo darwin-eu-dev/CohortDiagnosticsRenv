@@ -8,7 +8,7 @@ This project includes a renv.lock file to run CohortDiagnostics v3.2.4.
 
 # 1. Instructions
 
-In this project you can also find a extras/CodeToRun.R to run CohortDiagnostics. In the R folder, there is a script with a helper function to include in a package with the parameters adjusted for Darwin studies. 
+In this project you can also find a extras/CodeToRun.R to executeDiagnostics. In the R folder, there is a script with a helper function with the parameters adjusted for Darwin studies. 
 
 # Install the latest version of renv:
 
