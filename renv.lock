@@ -4,14 +4,14 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cran.rstudio.com"
+        "URL": "https://cloud.r-project.org"
       }
     ]
   },
   "Packages": {
     "Andromeda": {
       "Package": "Andromeda",
-      "Version": "0.6.1",
+      "Version": "0.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -27,19 +27,34 @@
         "tidyselect",
         "zip"
       ],
-      "Hash": "ae741b16de25b2ab0a87b9f38e159282"
+      "Hash": "cad6476575c944a25e52317aa6edced9"
     },
-    "CohortDiagnostics": {
-      "Package": "CohortDiagnostics",
-      "Version": "3.2.2",
+    "CirceR": {
+      "Package": "CirceR",
+      "Version": "1.1.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "darwin-eu-dev",
+      "RemoteRepo": "CirceR",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v1.1.1",
+      "Requirements": [
+        "R",
+        "RJSONIO",
+        "rJava"
+      ],
+      "Hash": "4ce22e45b10c6b99fee3117e1232d745"
+    },
+    "CohortDiagnostics": {
+      "Package": "CohortDiagnostics",
+      "Version": "3.2.4",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortDiagnostics",
-      "RemoteRef": "main",
-      "RemoteSha": "ca6d9074bb097b9ce60b7bc6bf72e68a84f650fe",
-      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction,\r ohdsi/ResultModelManager,\r ohdsi/ROhdsiWebApi, ohdsi/CirceR,\r ohdsi/CohortGenerator,\r ohdsi/OhdsiShinyModules",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v3.2.4",
+      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ResultModelManager, ohdsi/ROhdsiWebApi, ohdsi/CirceR, ohdsi/CohortGenerator, ohdsi/OhdsiShinyModules",
       "Requirements": [
         "Andromeda",
         "CohortGenerator",
@@ -61,7 +76,7 @@
         "stringr",
         "tidyr"
       ],
-      "Hash": "fc8df332012041ac85af21b008b6db8c"
+      "Hash": "7063d1d06f7c2d2591ebd2b2d94826e6"
     },
     "CohortGenerator": {
       "Package": "CohortGenerator",
@@ -69,10 +84,9 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "ohdsi",
       "RemoteRepo": "CohortGenerator",
-      "RemoteRef": "main",
-      "RemoteSha": "8379cb8f0b0a089589e6b14be52b752dc687afc6",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v0.8.0",
       "Remotes": "ohdsi/CirceR, ohdsi/Eunomia, ohdsi/ROhdsiWebApi",
       "Requirements": [
         "DatabaseConnector",
@@ -91,7 +105,7 @@
         "rlang",
         "stringi"
       ],
-      "Hash": "f0a42dc45bbd13cefbfde966beb531b8"
+      "Hash": "d16ddff3214d37f4133457e3a97920e3"
     },
     "DBI": {
       "Package": "DBI",
@@ -106,7 +120,7 @@
     },
     "DatabaseConnector": {
       "Package": "DatabaseConnector",
-      "Version": "5.1.0",
+      "Version": "6.2.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -114,6 +128,9 @@
         "R",
         "SqlRender",
         "bit64",
+        "checkmate",
+        "dbplyr",
+        "digest",
         "methods",
         "rJava",
         "readr",
@@ -122,36 +139,17 @@
         "urltools",
         "utils"
       ],
-      "Hash": "7efe1532a5256de9dd7f2f8d90b4e6da"
-    },
-    "Eunomia": {
-      "Package": "Eunomia",
-      "Version": "1.0.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "OHDSI",
-      "RemoteRepo": "Eunomia",
-      "RemoteRef": "main",
-      "RemoteSha": "1220fdbe550762ff131f66f05f74f2610a4e85ca",
-      "Requirements": [
-        "DatabaseConnector",
-        "RSQLite",
-        "SqlRender",
-        "readr"
-      ],
-      "Hash": "9d4cabd8972e388c95c09524d18a9eab"
+      "Hash": "115822c1e0acd6b602a414d1226d1a3b"
     },
     "FeatureExtraction": {
       "Package": "FeatureExtraction",
-      "Version": "3.3.0",
+      "Version": "3.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "ohdsi",
       "RemoteRepo": "FeatureExtraction",
-      "RemoteRef": "main",
-      "RemoteSha": "f6bf1cb5d14f45c242b368ea24f94bb8ae70ff50",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v3.3.1",
       "Remotes": "ohdsi/Eunomia",
       "Requirements": [
         "Andromeda",
@@ -171,11 +169,11 @@
         "readr",
         "rlang"
       ],
-      "Hash": "117e99ad371057536d22afd876081081"
+      "Hash": "e536964ccc5c604953437fae71ad8fd5"
     },
     "ParallelLogger": {
       "Package": "ParallelLogger",
-      "Version": "3.2.0",
+      "Version": "3.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -186,7 +184,7 @@
         "utils",
         "xml2"
       ],
-      "Hash": "28193dcf6f3a60b54ed7e2d34d1ffd9a"
+      "Hash": "fd636fc067099b75b8ad17e9104b10f3"
     },
     "R6": {
       "Package": "R6",
@@ -212,7 +210,7 @@
       "Package": "RSQLite",
       "Version": "2.3.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "R",
@@ -239,36 +237,42 @@
     },
     "ResultModelManager": {
       "Package": "ResultModelManager",
-      "Version": "0.1.0",
+      "Version": "0.5.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "OHDSI",
       "RemoteRepo": "ResultModelManager",
-      "RemoteRef": "7b1e8218170629ec500277cc7f829acce44e31ab",
-      "RemoteSha": "7b1e8218170629ec500277cc7f829acce44e31ab",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v0.5.1",
       "Requirements": [
         "DBI",
         "DatabaseConnector",
         "ParallelLogger",
+        "R",
         "R6",
         "SqlRender",
         "checkmate",
-        "pool"
+        "dplyr",
+        "fastmap",
+        "lubridate",
+        "pool",
+        "readr",
+        "rlang",
+        "zip"
       ],
-      "Hash": "1a96f28c19efa34e857281cb36a96a69"
+      "Hash": "6cb9c55df2539049c55a9578b4569d6b"
     },
     "SqlRender": {
       "Package": "SqlRender",
-      "Version": "1.15.1",
+      "Version": "1.15.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "checkmate",
         "rJava",
         "rlang"
       ],
-      "Hash": "e506a1b16cd84c16c762b039b70c8eaa"
+      "Hash": "a224990dff017dcc9448ab22eb587d7b"
     },
     "backports": {
       "Package": "backports",
@@ -318,20 +322,20 @@
     },
     "cachem": {
       "Package": "cachem",
-      "Version": "1.0.8",
+      "Version": "1.0.7",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "fastmap",
         "rlang"
       ],
-      "Hash": "c35768291560ce302c0a6589f92e837d"
+      "Hash": "cda74447c42f529de601fe4d4050daef"
     },
     "checkmate": {
       "Package": "checkmate",
       "Version": "2.2.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "backports",
@@ -400,9 +404,9 @@
     },
     "dbplyr": {
       "Package": "dbplyr",
-      "Version": "2.3.3",
+      "Version": "2.3.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "R",
@@ -424,7 +428,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "d6fd1b1440c1cacc6623aaa4e9fe352b"
+      "Hash": "63534894354af6b2587b7aa518a5193a"
     },
     "digest": {
       "Package": "digest",
@@ -441,7 +445,7 @@
       "Package": "dplyr",
       "Version": "1.1.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "R6",
@@ -464,7 +468,7 @@
       "Package": "fansi",
       "Version": "1.0.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "grDevices",
@@ -501,16 +505,6 @@
       ],
       "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e"
     },
-    "here": {
-      "Package": "here",
-      "Version": "1.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "rprojroot"
-      ],
-      "Hash": "24b224366f9c2e7534d2344d10d59211"
-    },
     "hms": {
       "Package": "hms",
       "Version": "1.1.3",
@@ -527,13 +521,13 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.7",
+      "Version": "1.8.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "methods"
       ],
-      "Hash": "266a20443ca13c65688b2116d5220f76"
+      "Hash": "3ee4d9899e4db3e976fc82b98d24a31a"
     },
     "later": {
       "Package": "later",
@@ -550,7 +544,7 @@
       "Package": "lifecycle",
       "Version": "1.0.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -563,7 +557,7 @@
       "Package": "lubridate",
       "Version": "1.9.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "generics",
@@ -645,10 +639,13 @@
     },
     "prettyunits": {
       "Package": "prettyunits",
-      "Version": "1.1.1",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "95ef9167b75dde9d2ccc3c7528393e7e"
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "6b01fc98b1e86c4f705ce9dcfd2f57c7"
     },
     "progress": {
       "Package": "progress",
@@ -747,16 +744,6 @@
       ],
       "Hash": "a85c767b55f0bf9b7ad16c6d7baee5bb"
     },
-    "rprojroot": {
-      "Package": "rprojroot",
-      "Version": "2.0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "1de7ab598047a87bba48434ba35d497d"
-    },
     "snow": {
       "Package": "snow",
       "Version": "0.4-4",
@@ -785,7 +772,7 @@
       "Package": "stringr",
       "Version": "1.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -915,7 +902,7 @@
       "Package": "vctrs",
       "Version": "0.6.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -929,7 +916,7 @@
       "Package": "vroom",
       "Version": "1.6.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "bit64",
@@ -953,16 +940,16 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "2.5.0",
+      "Version": "2.5.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "grDevices",
         "graphics",
         "stats"
       ],
-      "Hash": "c0e49a9760983e81e55cdd9be92e7182"
+      "Hash": "d77c6f74be05c33164e33fbc85540cae"
     },
     "xml2": {
       "Package": "xml2",
