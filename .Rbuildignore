@@ -1,2 +1,8 @@
+^renv$
+^renv\.lock$
 ^CohortDiagnosticsRenv\.Rproj$
 ^\.Rproj\.user$
+^CodeToRunTest\.R$
+^extras$
+^results$
+^LICENSE\.md$

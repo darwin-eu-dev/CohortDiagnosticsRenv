@@ -59,6 +59,7 @@ runDiagnostics(
   vocabularyDatabaseSchema = cdmDatabaseSchema,
   cohortDatabaseSchema = cohortDatabaseSchema,
   cohortTable = cohortTable,
+  cohortsFolder = cohortsFolder,
   outputDir = outputDir,
   databaseId = databaseId
 )

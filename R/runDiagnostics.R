@@ -65,6 +65,7 @@ runDiagnostics <- function(connectionDetails = NULL,
                            cdmDatabaseSchema,
                            cohortDatabaseSchema = cdmDatabaseSchema,
                            vocabularyDatabaseSchema = cdmDatabaseSchema,
+                           verifyDependencies = FALSE,
                            cohortTable = "cohort",
                            tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
                            cohortsFolder = NULL,
@@ -83,10 +84,10 @@ runDiagnostics <- function(connectionDetails = NULL,
     add = TRUE
   )
 
-  # if (verifyDependencies) {
-  #   ParallelLogger::logInfo("Checking whether correct package versions are installed")
-  #   verifyDependencies()
-  # }
+  if (verifyDependencies) {
+    ParallelLogger::logInfo("Checking whether correct package versions are installed")
+    verifyDependencies()
+  }
 
   ParallelLogger::logInfo("Creating cohorts")
   cohortTableNames <- CohortGenerator::getCohortTableNames(cohortTable = cohortTable)
