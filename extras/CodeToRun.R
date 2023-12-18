@@ -18,7 +18,6 @@ renv::restore()
 library(CohortDiagnosticsRenv)
 
 # 2. Edit the variables below to create a connection and run CohortDiagnostics
-
 dbms <- Sys.getenv("dbms")
 host <- Sys.getenv("host")
 dbname <- Sys.getenv("dbname")
@@ -53,8 +52,35 @@ outputDir <- "..."
 # The databaseId is a short (<= 20 characters)
 databaseId <- "..."
 
-# 3. This statement instatiates the cohorts, performs the diagnostics, and writes the results to
-# a zip file containing CSV files
+# Using an ExternalConceptCountsTable ------------------------
+
+# If using the DARWIN version of CohortDiagnostics you can create in advance the concept_counts table
+
+# 1. Create the conceptCountsTable in the cohortDatabaseSchema
+CohortDiagnostics::createConceptCountsTable(connectionDetails = connectionDetails,
+                                            connection = NULL,
+                                            cdmDatabaseSchema = cdmDatabaseSchema,
+                                            tempEmulationSchema = NULL,
+                                            conceptCountsDatabaseSchema = cohortDatabaseSchema,
+                                            conceptCountsTable = "concept_counts",
+                                            conceptCountsTableIsTemp = FALSE,
+                                            removeCurrentTable = TRUE)
+
+# 2. Set useExternalConceptCountsTable = TRUE if created.
+#    - Provide the name of the table witn conceptCountsTable = "concept_counts"
+# 	 - Or just set useExternalConceptCountsTable = "achilles" to use the counts in the CDM
+CohortDiagnosticsRenv::runDiagnostics(connectionDetails = connectionDetails,
+                                      cdmDatabaseSchema = cdmDatabaseSchema,
+                                      vocabularyDatabaseSchema = cdmDatabaseSchema,
+                                      cohortDatabaseSchema = cohortDatabaseSchema,
+                                      cohortTable = cohortTable,
+                                      cohortsFolder = cohortsFolder,
+                                      outputDir = outputDir,
+                                      databaseId = databaseId,
+                                      useExternalConceptCountsTable = TRUE,
+                                      conceptCountsTable = "concept_counts")
+
+# 3. If not using an ExternalConceptCountsTable, CohortDiagnostics can be run as default
 CohortDiagnosticsRenv::runDiagnostics(connectionDetails = connectionDetails,
                                       cdmDatabaseSchema = cdmDatabaseSchema,
                                       vocabularyDatabaseSchema = cdmDatabaseSchema,
