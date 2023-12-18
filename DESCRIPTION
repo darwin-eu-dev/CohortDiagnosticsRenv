@@ -10,17 +10,16 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-  CirceR (>= 1.1.1), 
-  CohortDiagnostics (>= 3.2.2), 
-  CohortGenerator (>= 0.8.0),
-  FeatureExtraction (>= 2), 
-  ParallelLogger (>= 3.3.1), 
-  dplyr (>= 1.1.2),
-  jsonlite (>= 1.8.2),
-  renv (>= 1.0.3)
+  CirceR (== 1.1.1), 
+  CohortDiagnostics (== 3.2.2), 
+  CohortGenerator (== 0.8.0),
+  FeatureExtraction (== 3.3.1), 
+  ParallelLogger (== 3.3.1), 
+  dplyr (== 1.1.2),
+  jsonlite (== 1.8.2),
+  renv (== 1.0.3)
 Remotes:
   ohdsi/CohortDiagnostics,
   ohdsi/CirceR,
   ohdsi/CohortGenerator,
-  ohdsi/FeatureExtraction,
-  ohdsi/ParallelLogger
+  ohdsi/FeatureExtraction
