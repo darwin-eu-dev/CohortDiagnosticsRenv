@@ -14,8 +14,10 @@ runDiagnostics(
   cohortTable = "cohort",
   tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
   cohortsFolder = NULL,
-  outputDir,
-  databaseId = "Unknown"
+  outputDir = NULL,
+  databaseId = "Unknown",
+  useExternalConceptCountsTable = FALSE,
+  conceptCountsTable = "#concept_counts"
 )
 }
 \arguments{
@@ -65,6 +67,12 @@ drive since this greatly impacts performance.}
 
 \item{databaseId}{A short string for identifying the database (e.g.
 'Synpuf').}
+
+\item{useExternalConceptCountsTable}{If TRUE, CohortDiagnostics will look for this table
+in the cohortDatabaseSchema, provided the name in
+conceptCountsTable.}
+
+\item{conceptCountsTable}{The name of the ExternalConceptCountsTable.}
 }
 \description{
 \code{runDiagnostics()} Execute the CohortDiagnostics section of the study.

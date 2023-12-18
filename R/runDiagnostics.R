@@ -51,6 +51,10 @@
 #'                                            drive since this greatly impacts performance.
 #' @param databaseId                          A short string for identifying the database (e.g.
 #'                                            'Synpuf').
+#' @param useExternalConceptCountsTable       If TRUE, CohortDiagnostics will look for this table
+#'                                            in the cohortDatabaseSchema, provided the name in
+#'                                            conceptCountsTable.
+#' @param conceptCountsTable                  The name of the ExternalConceptCountsTable.
 #'
 #' @importFrom ParallelLogger addDefaultFileLogger addDefaultErrorReportLogger unregisterLogger unregisterLogger logInfo
 #' @importFrom CohortGenerator getCohortTableNames createCohortTables createEmptyCohortDefinitionSet generateCohortSet exportCohortStatsTables
@@ -69,8 +73,10 @@ runDiagnostics <- function(connectionDetails = NULL,
                            cohortTable = "cohort",
                            tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
                            cohortsFolder = NULL,
-                           outputDir,
-                           databaseId = "Unknown") {
+                           outputDir = NULL,
+                           databaseId = "Unknown",
+                           useExternalConceptCountsTable = FALSE,
+                           conceptCountsTable = "#concept_counts") {
 
   if (!file.exists(outputDir)) {
     dir.create(outputDir, recursive = TRUE)
@@ -244,6 +250,7 @@ runDiagnostics <- function(connectionDetails = NULL,
     tempEmulationSchema = tempEmulationSchema,
     cohortTable = cohortTable,
     cohortTableNames = cohortTableNames,
+    # conceptCountsTable = conceptCountsTable,
     vocabularyDatabaseSchema = vocabularyDatabaseSchema,
     cdmVersion = 5,
     runInclusionStatistics = TRUE,
@@ -258,7 +265,8 @@ runDiagnostics <- function(connectionDetails = NULL,
     temporalCovariateSettings = featureExtractionCovariateSettings,
     # temporalCovariateSettings = getDefaultCovariateSettings(),
     minCellCount = 5,
-    incremental = FALSE
+    incremental = FALSE,
     # incrementalFolder = file.path(exportFolder, "incremental")
+    # useExternalConceptCountsTable = useExternalConceptCountsTable
   )
 }

@@ -10,3 +10,5 @@ output/
 renv/
 CodeToRunTest.R
 cohorts/
+errorReportSql.txt
+testCohorts/
