@@ -125,7 +125,7 @@
       "Package": "RSQLite",
       "Version": "2.2.17",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "Rcpp": {
       "Package": "Rcpp",
@@ -147,7 +147,7 @@
       "Package": "SqlRender",
       "Version": "1.15.2",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "askpass": {
       "Package": "askpass",
@@ -183,13 +183,13 @@
       "Package": "cachem",
       "Version": "1.0.6",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "checkmate": {
       "Package": "checkmate",
       "Version": "2.1.0",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "cli": {
       "Package": "cli",
@@ -237,7 +237,7 @@
       "Package": "dbplyr",
       "Version": "2.3.2",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "digest": {
       "Package": "digest",
@@ -249,13 +249,13 @@
       "Package": "dplyr",
       "Version": "1.1.2",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "fansi": {
       "Package": "fansi",
       "Version": "1.0.3",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "farver": {
       "Package": "farver",
@@ -315,13 +315,13 @@
       "Package": "lifecycle",
       "Version": "1.0.3",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "lubridate": {
       "Package": "lubridate",
       "Version": "1.8.0",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -453,7 +453,7 @@
       "Package": "stringr",
       "Version": "1.5.0",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "sys": {
       "Package": "sys",
@@ -513,7 +513,7 @@
       "Package": "vctrs",
       "Version": "0.6.3",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "viridisLite": {
       "Package": "viridisLite",
@@ -525,13 +525,13 @@
       "Package": "vroom",
       "Version": "1.6.0",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "withr": {
       "Package": "withr",
       "Version": "2.5.0",
       "Source": "Repository",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "xml2": {
       "Package": "xml2",
