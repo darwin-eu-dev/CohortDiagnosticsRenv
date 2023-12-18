@@ -27,13 +27,13 @@
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
-      "Version": "3.2.2",
+      "Version": "HEAD",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "darwin-eu-dev",
-      "RemoteRef": "v3.2.2"
+      "RemoteRef": "HEAD"
     },
     "CohortGenerator": {
       "Package": "CohortGenerator",
