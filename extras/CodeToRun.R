@@ -1,19 +1,24 @@
-# 1. Install the environment --------------------
+# Install the environment --------------------
 
-# Install the latest version of renv:
+# 1. In RStudio, create a new project: File -> New Project... -> New Directory -> New Project.
+# If asked if you want to use `renv` with the project, answer ‘no’.
+
+# 2. Inside the project, install the latest version of renv
 install.packages("renv")
 
-# Build the local library. This may take a while:
-renv::init()
+# 3. Download the lock file:
+download.file("https://raw.githubusercontent.com/darwin-eu-dev/CohortDiagnosticsRenv/main/renv.lock", "renv.lock")
 
-# Restore the library
+# 4. Build the local library
 renv::restore()
 
-# 2. Running the package ------------------------
+# Running the package ------------------------
 
+# 1. Load the CohortDiagnosticsRenv package
 library(CohortDiagnosticsRenv)
 
-# Edit the variables below to the correct values for your environment:
+# 2. Edit the variables below to create a connection and run CohortDiagnostics
+
 dbms <- Sys.getenv("dbms")
 host <- Sys.getenv("host")
 dbname <- Sys.getenv("dbname")
@@ -48,7 +53,7 @@ outputDir <- "..."
 # The databaseId is a short (<= 20 characters)
 databaseId <- "..."
 
-# This statement instatiates the cohorts, performs the diagnostics, and writes the results to
+# 3. This statement instatiates the cohorts, performs the diagnostics, and writes the results to
 # a zip file containing CSV files
 CohortDiagnosticsRenv::runDiagnostics(connectionDetails = connectionDetails,
                                       cdmDatabaseSchema = cdmDatabaseSchema,
@@ -59,7 +64,7 @@ CohortDiagnosticsRenv::runDiagnostics(connectionDetails = connectionDetails,
                                       outputDir = outputDir,
                                       databaseId = databaseId)
 
-# (Optionally) to view the results locally:
+# 4. (Optionally) to view the results locally:
 CohortDiagnostics::createMergedResultsFile(dataFolder = file.path(outputDir),
                                            sqliteDbPath = file.path(outputDir, "MergedCohortDiagnosticsData.sqlite"))
 

@@ -6,3 +6,8 @@
 ^extras$
 ^results$
 ^LICENSE\.md$
+^CodeToRunTest\.R$
+^cohorts$
+^errorReportSql\.txt$
+^testCohorts$
+^sql$
