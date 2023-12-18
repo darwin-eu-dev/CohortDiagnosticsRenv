@@ -75,8 +75,8 @@ runDiagnostics <- function(connectionDetails = NULL,
                            cohortsFolder = NULL,
                            outputDir = NULL,
                            databaseId = "Unknown",
-                           useExternalConceptCountsTable = FALSE,
-                           conceptCountsTable = "#concept_counts") {
+                           conceptCountsTable = "#concept_counts",
+                           useExternalConceptCountsTable = FALSE) {
 
   if (!file.exists(outputDir)) {
     dir.create(outputDir, recursive = TRUE)
@@ -238,35 +238,70 @@ runDiagnostics <- function(connectionDetails = NULL,
       featureBasedCovariateSettings
     )
 
-  # run cohort diagnostics
-  CohortDiagnostics::executeDiagnostics(
-    cohortDefinitionSet = cohortDefinitionSet, # removes reference cohort and very large Visit cohorts
-    exportFolder = outputDir,
-    databaseId = databaseId,
-    cohortDatabaseSchema = cohortDatabaseSchema,
-    connectionDetails = connectionDetails,
-    connection = connection,
-    cdmDatabaseSchema = cdmDatabaseSchema,
-    tempEmulationSchema = tempEmulationSchema,
-    cohortTable = cohortTable,
-    cohortTableNames = cohortTableNames,
-    # conceptCountsTable = conceptCountsTable,
-    vocabularyDatabaseSchema = vocabularyDatabaseSchema,
-    cdmVersion = 5,
-    runInclusionStatistics = TRUE,
-    runIncludedSourceConcepts = TRUE,
-    runOrphanConcepts = TRUE,
-    runTimeSeries = TRUE,
-    runVisitContext = FALSE,
-    runBreakdownIndexEvents = TRUE,
-    runIncidenceRate = TRUE,
-    runCohortRelationship = TRUE,
-    runTemporalCohortCharacterization = TRUE,
-    temporalCovariateSettings = featureExtractionCovariateSettings,
-    # temporalCovariateSettings = getDefaultCovariateSettings(),
-    minCellCount = 5,
-    incremental = FALSE,
-    # incrementalFolder = file.path(exportFolder, "incremental")
-    # useExternalConceptCountsTable = useExternalConceptCountsTable
-  )
+  if (useExternalConceptCountsTable) {
+    if (packageVersion("CohortDiagnostics") == "3.2.2") {
+    # run cohort diagnostics
+    CohortDiagnostics::executeDiagnostics(
+      cohortDefinitionSet = cohortDefinitionSet, # removes reference cohort and very large Visit cohorts
+      exportFolder = outputDir,
+      databaseId = databaseId,
+      cohortDatabaseSchema = cohortDatabaseSchema,
+      connectionDetails = connectionDetails,
+      connection = connection,
+      cdmDatabaseSchema = cdmDatabaseSchema,
+      tempEmulationSchema = tempEmulationSchema,
+      cohortTable = cohortTable,
+      cohortTableNames = cohortTableNames,
+      conceptCountsTable = conceptCountsTable,
+      vocabularyDatabaseSchema = vocabularyDatabaseSchema,
+      cdmVersion = 5,
+      runInclusionStatistics = TRUE,
+      runIncludedSourceConcepts = TRUE,
+      runOrphanConcepts = TRUE,
+      runTimeSeries = TRUE,
+      runVisitContext = FALSE,
+      runBreakdownIndexEvents = TRUE,
+      runIncidenceRate = TRUE,
+      runCohortRelationship = TRUE,
+      runTemporalCohortCharacterization = TRUE,
+      temporalCovariateSettings = featureExtractionCovariateSettings,
+      # temporalCovariateSettings = getDefaultCovariateSettings(),
+      minCellCount = 5,
+      incremental = FALSE,
+      # incrementalFolder = file.path(exportFolder, "incremental"),
+      useExternalConceptCountsTable = useExternalConceptCountsTable
+    )
+    } else {
+      warning("Incorrect version. Install darwin-eu-dev/CohortDiagnostics")
+    }
+  } else {
+    # run cohort diagnostics
+    CohortDiagnostics::executeDiagnostics(
+      cohortDefinitionSet = cohortDefinitionSet, # removes reference cohort and very large Visit cohorts
+      exportFolder = outputDir,
+      databaseId = databaseId,
+      cohortDatabaseSchema = cohortDatabaseSchema,
+      connectionDetails = connectionDetails,
+      connection = connection,
+      cdmDatabaseSchema = cdmDatabaseSchema,
+      tempEmulationSchema = tempEmulationSchema,
+      cohortTable = cohortTable,
+      cohortTableNames = cohortTableNames,
+      vocabularyDatabaseSchema = vocabularyDatabaseSchema,
+      cdmVersion = 5,
+      runInclusionStatistics = TRUE,
+      runIncludedSourceConcepts = TRUE,
+      runOrphanConcepts = TRUE,
+      runTimeSeries = TRUE,
+      runVisitContext = FALSE,
+      runBreakdownIndexEvents = TRUE,
+      runIncidenceRate = TRUE,
+      runCohortRelationship = TRUE,
+      runTemporalCohortCharacterization = TRUE,
+      temporalCovariateSettings = featureExtractionCovariateSettings,
+      # temporalCovariateSettings = getDefaultCovariateSettings(),
+      minCellCount = 5,
+      incremental = FALSE
+    )
+  }
 }

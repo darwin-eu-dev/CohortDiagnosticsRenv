@@ -544,6 +544,16 @@
       "Version": "2.2.1",
       "Source": "Repository",
       "Repository": "CRAN"
+    },
+    "CohortDiagnosticsRenv": {
+      "Package": "CohortDiagnosticsRenv",
+      "Version": "HEAD",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortDiagnosticsRenv",
+      "RemoteUsername": "darwin-eu-dev",
+      "RemoteRef": "HEAD"
     }
   }
 }
