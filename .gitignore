@@ -7,7 +7,6 @@
 .DS_Store
 results/
 output/
-renv/
 CodeToRunTest.R
 cohorts/
 errorReportSql.txt
