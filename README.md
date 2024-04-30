@@ -4,21 +4,17 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This project includes a renv.lock file to run CohortDiagnostics v3.2.4.
+This project includes a renv.lock file to run the Darwin version of CohortDiagnostics.
 
 # 1. Instructions
 
-In this project you can also find a extras/CodeToRun.R to executeDiagnostics. In the R folder, there is a script with a helper function with the parameters adjusted for Darwin studies. 
+In this project you can find multiple scripts (extras folder) to run CohortDiagnostics. The scripts ending with "cdm.R" are using a CDMConnector object. 
+In the R folder, there is a script with a helper function with the parameters adjusted for Darwin studies. 
 
 # Install the latest version of renv:
 
 ```R
 install.packages("renv")
-```
-
-# Build the local library. This may take a while:
-```R
-renv::init()
 ```
 
 # Restore the library
