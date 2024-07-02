@@ -23,3 +23,7 @@ Remotes:
   ohdsi/CirceR,
   ohdsi/CohortGenerator,
   ohdsi/FeatureExtraction
+Suggests: 
+    testthat (>= 3.0.0),
+    Eunomia
+Config/testthat/edition: 3

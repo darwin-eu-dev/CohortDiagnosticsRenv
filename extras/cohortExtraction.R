@@ -1,37 +1,30 @@
 library(ROhdsiWebApi)
-baseUrl <- "https://test-atlas.ehden.eu/WebAPI"
+library(here)
+library(readxl)
+library(dplyr)
 
-authorizeWebApi(
+library(ROhdsiWebApi)
+baseUrl <- "https://atlas-dev.darwin-eu.org/WebAPI"
+
+token <- Sys.getenv("ATLAS_TOKEN")
+ROhdsiWebApi::setAuthHeader(baseUrl, authHeader = token)
+ROhdsiWebApi::getCdmSources(baseUrl)
+
+cohortsToCreate <- ROhdsiWebApi::exportCohortDefinitionSet(
   baseUrl,
-  authMethod = "db",
-  webApiUsername = Sys.getenv('EHDEN_WEBAPI_USERNAME'),
-  webApiPassword = Sys.getenv('EHDEN_WEBAPI_PASSWORD')
-)
+  c(598, 615, 596, 617, 618, 616, 713, 714)
+) %>% select(atlasId, cohortId, cohortName)
 
-getCdmSources(baseUrl)
+write.csv(cohortsToCreate, file = "inst/CohortsToCreate.csv", row.names = FALSE)
 
-cohortDefinitionSet <- ROhdsiWebApi::exportCohortDefinitionSet(
+ROhdsiWebApi::insertCohortDefinitionSetInPackage(
+  fileName = "inst/CohortsToCreate.csv",
   baseUrl,
-  c(92:97, 100, setdiff(101:127, 118))
+  jsonFolder = "inst/cohorts",
+  sqlFolder = "inst/sql",
+  rFileName = "R/CreateCohorts.R",
+  insertTableSql = TRUE,
+  insertCohortCreationR = TRUE,
+  generateStats = FALSE,
+  packageName
 )
-write.csv(cohortDefinitionSet, 'inst/cohortDefinitionSet.csv')
-
-# Insert cohort definitions from ATLAS into package -----------------------
-for (cohortId in c(92:97, 100)) {
-  ROhdsiWebApi::insertCohortDefinitionInPackage(
-    cohortId,
-    name = cohortId,
-    jsonFolder = "inst/cohorts",
-    sqlFolder = "inst/sql/sql_server",
-    baseUrl,
-    generateStats = FALSE
-  )
-}
-
-# Get treatment cohort definitions from Atlas ------------------------------
-for (cohortId in setdiff(101:127, 118)) {
-  print(cohortId)
-  object <- getCohortDefinition(cohortId = cohortId, baseUrl = baseUrl)
-  json <- ROhdsiWebApi:::.toJSON(object$expression, pretty = TRUE)
-  writeLines(json, file.path("inst", "treatment_cohorts", paste0(cohortId, ".json")))
-}
