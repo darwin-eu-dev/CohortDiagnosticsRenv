@@ -9,11 +9,11 @@
     ]
   },
   "Packages": {
-    "BH": {
-      "Package": "BH",
-      "Version": "1.84.0-0",
+        "Andromeda": {
+      "Package": "Andromeda",
+      "Version": "0.6.4",
       "Source": "Repository",
-      "Repository": "CRAN"
+      "Repository": "RSPM"
     },
     "CirceR": {
       "Package": "CirceR",
@@ -25,9 +25,57 @@
       "RemoteUsername": "ohdsi",
       "RemoteRef": "v1.3.2"
     },
+    "CohortDiagnostics": {
+      "Package": "CohortDiagnostics",
+      "Version": "3.2.5",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortDiagnostics",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v3.2.5"
+    },
+    "OhdsiShinyModules": {
+      "Package": "OhdsiShinyModules",
+      "Version": "2.1.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "OhdsiShinyModules",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v2.1.2"
+    },
+    "CohortGenerator": {
+      "Package": "CohortGenerator",
+      "Version": "0.8.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortGenerator",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v0.8.1"
+    },
+    "BH": {
+      "Package": "BH",
+      "Version": "1.84.0-0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "readxl": {
+      "Package": "readxl",
+      "Version": "1.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
     "CommonDataModel": {
       "Package": "CommonDataModel",
       "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "testthat": {
+      "Package": "testthat",
+      "Version": "3.2.1.1",
       "Source": "Repository",
       "Repository": "CRAN"
     },
@@ -49,6 +97,42 @@
       "Source": "Repository",
       "Repository": "CRAN"
     },
+    "FeatureExtraction": {
+      "Package": "FeatureExtraction",
+      "Version": "3.3.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "FeatureExtraction",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v3.3.2"
+    },
+    "ResultModelManager": {
+      "Package": "ResultModelManager",
+      "Version": "0.5.5",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ResultModelManager",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v0.5.5"
+    },
+    "ROhdsiWebApi": {
+      "Package": "ROhdsiWebApi",
+      "Version": "1.3.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ROhdsiWebApi",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "v1.3.3"
+    },
+    "here": {
+      "Package": "here",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
     "Eunomia": {
       "Package": "Eunomia",
       "Version": "2.0.0",
@@ -66,16 +150,6 @@
       "Version": "1.7-0",
       "Source": "Repository",
       "Repository": "CRAN"
-    },
-    "OhdsiShinyModules": {
-      "Package": "OhdsiShinyModules",
-      "Version": "2.1.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "OhdsiShinyModules",
-      "RemoteUsername": "ohdsi",
-      "RemoteRef": "v2.1.2"
     },
     "ParallelLogger": {
       "Package": "ParallelLogger",
