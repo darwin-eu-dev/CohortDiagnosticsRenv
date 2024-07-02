@@ -11,4 +11,4 @@ CodeToRunTest.R
 cohorts/
 errorReportSql.txt
 testCohorts/
-sql/
+renv/
