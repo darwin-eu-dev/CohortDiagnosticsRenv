@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' `runDiagnostics()` Execute the CohortDiagnostics section of the study.
+#' Execute the CohortDiagnostics section of the study
 #'
 #' @details
 #' This function executes the cohort diagnostics.
@@ -42,19 +42,15 @@
 #'                                            truly support temp tables. To emulate temp tables,
 #'                                            provide a schema with write privileges where temp tables
 #'                                            can be created.
-#' @param verifyDependencies                  Check whether correct package versions are installed?
-#' @param cohortsFolder                       Name of local folder to find the cohorts; make sure to use
-#'                                            forward slashes (/). Do not use a folder on a network
-#'                                            drive since this greatly impacts performance.
+#' @param settingsFileName                    Name of the settings file, by convention the default is "CohortsToCreate.csv".
+#' @param jsonFolder                          Location of the cohort json files, by convention the default is "cohorts".
+#' @param sqlFolder                           Location of the cohort sql files, by convention the default is "sql.
+#' @param packageName                         Name of the package in character.
 #' @param outputDir                           Name of local folder to place results; make sure to use
 #'                                            forward slashes (/). Do not use a folder on a network
 #'                                            drive since this greatly impacts performance.
 #' @param databaseId                          A short string for identifying the database (e.g.
 #'                                            'Synpuf').
-#' @param useExternalConceptCountsTable       If TRUE, CohortDiagnostics will look for this table
-#'                                            in the cohortDatabaseSchema, provided the name in
-#'                                            conceptCountsTable.
-#' @param conceptCountsTable                  The name of the ExternalConceptCountsTable.
 #'
 #' @importFrom ParallelLogger addDefaultFileLogger addDefaultErrorReportLogger unregisterLogger unregisterLogger logInfo
 #' @importFrom CohortGenerator getCohortTableNames createCohortTables createEmptyCohortDefinitionSet generateCohortSet exportCohortStatsTables
@@ -62,6 +58,7 @@
 #' @importFrom CirceR cohortExpressionFromJson buildCohortQuery createGenerateOptions
 #' @importFrom FeatureExtraction createCohortBasedTemporalCovariateSettings createTemporalCovariateSettings
 #' @importFrom CohortDiagnostics executeDiagnostics
+#' @importFrom readr read_csv
 #' @import dplyr
 #' @export
 runDiagnostics <- function(connectionDetails = NULL,
@@ -69,14 +66,14 @@ runDiagnostics <- function(connectionDetails = NULL,
                            cdmDatabaseSchema,
                            cohortDatabaseSchema = cdmDatabaseSchema,
                            vocabularyDatabaseSchema = cdmDatabaseSchema,
-                           verifyDependencies = FALSE,
                            cohortTable = "cohort",
                            tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
-                           cohortsFolder = NULL,
-                           outputDir = NULL,
-                           databaseId = "Unknown",
-                           conceptCountsTable = "#concept_counts",
-                           useExternalConceptCountsTable = FALSE) {
+                           settingsFileName = "CohortsToCreate.csv",
+                           jsonFolder = "cohorts",
+                           sqlFolder = "sql",
+                           packageName,
+                           outputDir,
+                           databaseId = "Unknown") {
 
   if (!file.exists(outputDir)) {
     dir.create(outputDir, recursive = TRUE)
@@ -90,11 +87,6 @@ runDiagnostics <- function(connectionDetails = NULL,
     add = TRUE
   )
 
-  if (verifyDependencies) {
-    ParallelLogger::logInfo("Checking whether correct package versions are installed")
-    verifyDependencies()
-  }
-
   ParallelLogger::logInfo("Creating cohorts")
   cohortTableNames <- CohortGenerator::getCohortTableNames(cohortTable = cohortTable)
 
@@ -107,21 +99,12 @@ runDiagnostics <- function(connectionDetails = NULL,
     incremental = FALSE
   )
 
-  cohortDefinitionSet <- CohortGenerator::createEmptyCohortDefinitionSet()
-
-  cohortJsonFiles <- list.files(path = cohortsFolder, full.names = TRUE)
-  for (i in 1:length(cohortJsonFiles)) {
-    cohortJsonFileName <- cohortJsonFiles[i]
-    cohortName <- tools::file_path_sans_ext(basename(cohortJsonFileName))
-    cohortJson <- readChar(cohortJsonFileName, file.info(cohortJsonFileName)$size)
-    cohortExpression <- CirceR::cohortExpressionFromJson(cohortJson)
-    cohortSql <- CirceR::buildCohortQuery(cohortExpression, options = CirceR::createGenerateOptions(generateStats = FALSE))
-    cohortDefinitionSet <- rbind(cohortDefinitionSet, data.frame(cohortId = as.double(i),
-                                                                 cohortName = cohortName,
-                                                                 json = cohortJson,
-                                                                 sql = cohortSql,
-                                                                 stringsAsFactors = FALSE))
-  }
+  cohortDefinitionSet <- CohortGenerator::getCohortDefinitionSet(
+    settingsFileName = settingsFileName,
+    jsonFolder = jsonFolder,
+    sqlFolder = sqlFolder,
+    packageName = packageName
+  )
 
   # Generate the cohort set
   CohortGenerator::generateCohortSet(
@@ -207,7 +190,7 @@ runDiagnostics <- function(connectionDetails = NULL,
       useConditionOccurrence = TRUE,
       useProcedureOccurrence = FALSE,
       useDrugEraStart = TRUE,
-      useMeasurement = FALSE,
+      useMeasurement = TRUE,
       useConditionEraStart = FALSE,
       useConditionEraOverlap = FALSE,
       useConditionEraGroupStart = FALSE,
@@ -232,76 +215,34 @@ runDiagnostics <- function(connectionDetails = NULL,
       temporalEndDays = temporalEndDays
     )
 
-  featureExtractionCovariateSettings <-
-    list(
-      cohortBasedCovariateSettings,
-      featureBasedCovariateSettings
-    )
-
-  if (useExternalConceptCountsTable) {
-    if (packageVersion("CohortDiagnostics") == "3.2.2") {
-    # run cohort diagnostics
-    CohortDiagnostics::executeDiagnostics(
-      cohortDefinitionSet = cohortDefinitionSet, # removes reference cohort and very large Visit cohorts
-      exportFolder = outputDir,
-      databaseId = databaseId,
-      cohortDatabaseSchema = cohortDatabaseSchema,
-      connectionDetails = connectionDetails,
-      connection = connection,
-      cdmDatabaseSchema = cdmDatabaseSchema,
-      tempEmulationSchema = tempEmulationSchema,
-      cohortTable = cohortTable,
-      cohortTableNames = cohortTableNames,
-      conceptCountsTable = conceptCountsTable,
-      vocabularyDatabaseSchema = vocabularyDatabaseSchema,
-      cdmVersion = 5,
-      runInclusionStatistics = TRUE,
-      runIncludedSourceConcepts = TRUE,
-      runOrphanConcepts = TRUE,
-      runTimeSeries = TRUE,
-      runVisitContext = FALSE,
-      runBreakdownIndexEvents = TRUE,
-      runIncidenceRate = TRUE,
-      runCohortRelationship = TRUE,
-      runTemporalCohortCharacterization = TRUE,
-      temporalCovariateSettings = featureExtractionCovariateSettings,
-      # temporalCovariateSettings = getDefaultCovariateSettings(),
-      minCellCount = 5,
-      incremental = FALSE,
-      # incrementalFolder = file.path(exportFolder, "incremental"),
-      useExternalConceptCountsTable = useExternalConceptCountsTable
-    )
-    } else {
-      warning("Incorrect version. Install darwin-eu-dev/CohortDiagnostics")
-    }
-  } else {
-    # run cohort diagnostics
-    CohortDiagnostics::executeDiagnostics(
-      cohortDefinitionSet = cohortDefinitionSet, # removes reference cohort and very large Visit cohorts
-      exportFolder = outputDir,
-      databaseId = databaseId,
-      cohortDatabaseSchema = cohortDatabaseSchema,
-      connectionDetails = connectionDetails,
-      connection = connection,
-      cdmDatabaseSchema = cdmDatabaseSchema,
-      tempEmulationSchema = tempEmulationSchema,
-      cohortTable = cohortTable,
-      cohortTableNames = cohortTableNames,
-      vocabularyDatabaseSchema = vocabularyDatabaseSchema,
-      cdmVersion = 5,
-      runInclusionStatistics = TRUE,
-      runIncludedSourceConcepts = TRUE,
-      runOrphanConcepts = TRUE,
-      runTimeSeries = TRUE,
-      runVisitContext = FALSE,
-      runBreakdownIndexEvents = TRUE,
-      runIncidenceRate = TRUE,
-      runCohortRelationship = TRUE,
-      runTemporalCohortCharacterization = TRUE,
-      temporalCovariateSettings = featureExtractionCovariateSettings,
-      # temporalCovariateSettings = getDefaultCovariateSettings(),
-      minCellCount = 5,
-      incremental = FALSE
-    )
-  }
+  # run cohort diagnostics
+  CohortDiagnostics::executeDiagnostics(
+    cohortDefinitionSet = cohortDefinitionSet,
+    exportFolder = outputDir,
+    databaseId = databaseId,
+    cohortDatabaseSchema = cohortDatabaseSchema,
+    connectionDetails = connectionDetails,
+    connection = connection,
+    cdmDatabaseSchema = cdmDatabaseSchema,
+    tempEmulationSchema = tempEmulationSchema,
+    cohortTable = cohortTable,
+    cohortTableNames = cohortTableNames,
+    vocabularyDatabaseSchema = vocabularyDatabaseSchema,
+    cdmVersion = 5,
+    runInclusionStatistics = TRUE,
+    runIncludedSourceConcepts = TRUE,
+    runOrphanConcepts = TRUE,
+    runTimeSeries = TRUE,
+    runVisitContext = FALSE,
+    runBreakdownIndexEvents = TRUE,
+    runIncidenceRate = TRUE,
+    runCohortRelationship = TRUE,
+    runTemporalCohortCharacterization = TRUE,
+    temporalCovariateSettings = featureBasedCovariateSettings,
+    # temporalCovariateSettings = getDefaultCovariateSettings(),
+    minCellCount = 5,
+    minCharacterizationMean = 0.00001,
+    incremental = FALSE
+    # incrementalFolder = file.path(exportFolder, "incremental")
+  )
 }
